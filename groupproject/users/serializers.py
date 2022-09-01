@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CustomUser, Skills
+from .models import CustomUser, Skills, MentorSkills
 from django.contrib.auth.hashers import make_password
 
 class CustomUserSerializer(serializers.Serializer):
@@ -40,3 +40,11 @@ class SkillsSerializer(serializers.Serializer):
 
     def create(self, validated_data):
         return Skills.objects.create(**validated_data)
+
+class MentorSkillsSerializer(serializers.Serializer):
+  id = serializers.ReadOnlyField()
+  mentor_id = serializers.IntegerField(min_value=1)
+  skill_id = serializers.IntegerField(min_value=1)
+
+  def create(self, validated_data):
+    return MentorSkills.objects.create(**validated_data)

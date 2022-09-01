@@ -1,5 +1,8 @@
+from tkinter import CASCADE
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.contrib.auth import get_user_model
+
 
 STATES = (
   ('QLD', 'QLD'),
@@ -39,4 +42,15 @@ class CustomUser(AbstractUser):
 
 class Skills(models.Model):
   skill = models.CharField(max_length=200)
-  
+
+class MentorSkills(models.Model):
+  mentor_id = models.ForeignKey(
+    get_user_model(),
+    on_delete=CASCADE,
+    related_name="mentor_skills"
+  )
+  skill_id = models.ForeignKey(
+    'Skills',
+    on_delete=CASCASE,
+    related_name="skills_id"
+  )
