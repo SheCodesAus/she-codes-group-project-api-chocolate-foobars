@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CustomUser
+from .models import CustomUser, Skills
 from django.contrib.auth.hashers import make_password
 
 class CustomUserSerializer(serializers.Serializer):
@@ -33,3 +33,10 @@ class CustomUserSerializer(serializers.Serializer):
             instance.password = make_password(validated_data.get('password'))
         instance.save()
         return instance
+
+class SkillsSerializer(serializers.Serializer):
+    id = serializers.ReadOnlyField()
+    skill = serializers.CharField(max_length=200)
+
+    def create(self, validated_data):
+        return Skills.objects.create(**validated_data)

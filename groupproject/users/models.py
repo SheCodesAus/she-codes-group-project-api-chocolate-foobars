@@ -36,3 +36,7 @@ class CustomUser(AbstractUser):
 
   def __str__(self):
     return self.username 
+
+class Skills(models.Model):
+  skill = models.CharField(max_length=200)
+  
