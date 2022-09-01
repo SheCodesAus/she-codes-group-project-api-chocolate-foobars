@@ -46,11 +46,11 @@ class Skills(models.Model):
 class MentorSkills(models.Model):
   mentor_id = models.ForeignKey(
     get_user_model(),
-    on_delete=CASCADE,
+    on_delete=models.CASCADE,
     related_name="mentor_skills"
   )
   skill_id = models.ForeignKey(
     'Skills',
-    on_delete=CASCASE,
+    on_delete=models.CASCADE,
     related_name="skills_id"
   )
