@@ -1,6 +1,8 @@
+from unittest.util import _MAX_LENGTH
 from rest_framework import serializers
 from .models import CustomUser
 from django.contrib.auth.hashers import make_password
+from users.models import SKILLS
 
 class CustomUserSerializer(serializers.Serializer):
     id = serializers.ReadOnlyField()
@@ -13,6 +15,7 @@ class CustomUserSerializer(serializers.Serializer):
     feedback_for_mentors = serializers.CharField(max_length=2000)
     mentor_comments = serializers.CharField(max_length=2000)
     position = serializers.CharField(max_length=200)
+    skills = serializers.MultipleChoiceField(choices=SKILLS)
     status = serializers.CharField(max_length=200)
     
     def create(self, validated_data):
@@ -33,3 +36,4 @@ class CustomUserSerializer(serializers.Serializer):
             instance.password = make_password(validated_data.get('password'))
         instance.save()
         return instance
+
