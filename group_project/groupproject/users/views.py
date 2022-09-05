@@ -4,6 +4,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import CustomUser
 from .serializers import CustomUserSerializer
+from rest_framework import status, permissions
+from .permissions import IsOwnerOrReadOnly
 
 class CustomUserList(APIView):
 
@@ -32,8 +34,16 @@ class CustomUserDetail(APIView):
         serializer = CustomUserSerializer(user)
         return Response(serializer.data)
 
-    def put(self, request, pk):
-        user = self.get_object(pk)
+class CustomUserUpdate (APIView):
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+
+    def get(self, request):
+        user = request.user
+        serializer = CustomUserSerializer(user)
+        return Response(serializer.data)
+
+    def put(self, request):
+        user = request.user
         data = request.data
         serializer = CustomUserSerializer(
             instance=user,data=data,partial=True
