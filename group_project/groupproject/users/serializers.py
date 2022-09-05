@@ -31,7 +31,9 @@ class CustomUserSerializer(serializers.Serializer):
         instance.feedback_for_mentors = validated_data.get('feedback_for_mentors', instance.feedback_for_mentors)
         instance.mentor_comments = validated_data.get('mentor_comments', instance.mentor_comments)
         instance.status = validated_data.get('status', instance.status)
-        
+        instance.skills = validated_data.get('skills', instance.skills)
+        instance.position = validated_data.get('position', instance.position)
+
         if "password" in validated_data.keys():
             instance.password = make_password(validated_data.get('password'))
         instance.save()

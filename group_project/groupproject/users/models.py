@@ -36,7 +36,6 @@ class CustomUser(AbstractUser):
   phone_number = models.CharField(max_length=10, unique=True, blank=True, null=True)
   cv = models.TextField(blank=True, null=True)
   state = models.CharField(max_length=20, choices=STATES, blank=True, null=True)
-  years_industry_experience = models.IntegerField(blank=True, null=True)
   interview_notes = models.TextField(default=None, blank=True, null=True)
   feedback_for_mentors = models.TextField(default=None, blank=True, null=True)
   mentor_comments = models.TextField(default=None, blank=True, null=True)
