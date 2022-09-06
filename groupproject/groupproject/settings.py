@@ -50,7 +50,7 @@ REST_FRAMEWORK = {'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework.authenticat
 AUTH_USER_MODEL = 'users.CustomUser'
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddlewae',
+    'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
