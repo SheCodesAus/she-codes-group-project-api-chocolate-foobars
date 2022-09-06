@@ -39,9 +39,18 @@ class CustomUser(AbstractUser):
   interview_notes = models.TextField(default=None, blank=True, null=True)
   feedback_for_mentors = models.TextField(default=None, blank=True, null=True)
   mentor_comments = models.TextField(default=None, blank=True, null=True)
+<<<<<<< HEAD
+=======
+  # update to foreign keys when position and status models are created
+>>>>>>> parent of 4747fce (Deleted Main)
   position = models.CharField(max_length=20, choices=POSITIONS, default=None, blank=True, null=True)
   skills = MultiSelectField(choices=SKILLS, max_choices=3, blank=True, null=True)
   status = models.CharField(max_length=20, choices=STATUS, default='Application received', blank=True, null=True)
 
   def __str__(self):
     return self.username 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> parent of 4747fce (Deleted Main)

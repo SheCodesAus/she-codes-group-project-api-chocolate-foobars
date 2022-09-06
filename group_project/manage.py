@@ -6,7 +6,7 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'groupproject.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'group_project.settings')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
@@ -19,8 +19,4 @@ def main():
 
 
 if __name__ == '__main__':
-<<<<<<< HEAD
     main()
-=======
-    main()
->>>>>>> parent of 4747fce (Deleted Main)
