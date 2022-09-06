@@ -10,10 +10,7 @@ class CustomUserSerializer(serializers.Serializer):
     email = serializers.CharField(max_length=200)
     password = serializers.CharField(max_length=200)
     phone_number = serializers.CharField(max_length=200)
-<<<<<<< HEAD
     cv = serializers.CharField(max_length=200)
-=======
->>>>>>> parent of 4747fce (Deleted Main)
     state = serializers.CharField(max_length=200)
     interview_notes = serializers.CharField(max_length=2000)
     feedback_for_mentors = serializers.CharField(max_length=2000)
@@ -30,10 +27,7 @@ class CustomUserSerializer(serializers.Serializer):
         instance.username = validated_data.get('username', instance.username)
         instance.email = validated_data.get('email',instance.email)
         instance.phone_number = validated_data.get('phone_number', instance.phone_number)
-<<<<<<< HEAD
         instance.cv = validated_data.get('cv', instance.cv)
-=======
->>>>>>> parent of 4747fce (Deleted Main)
         instance.state = validated_data.get('state', instance.state)
         instance.interview_notes = validated_data.get('interview_notes', instance.interview_notes)
         instance.feedback_for_mentors = validated_data.get('feedback_for_mentors', instance.feedback_for_mentors)
@@ -46,7 +40,3 @@ class CustomUserSerializer(serializers.Serializer):
             instance.password = make_password(validated_data.get('password'))
         instance.save()
         return instance
-<<<<<<< HEAD
-=======
-
->>>>>>> parent of 4747fce (Deleted Main)

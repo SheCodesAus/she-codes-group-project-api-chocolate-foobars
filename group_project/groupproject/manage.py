@@ -19,8 +19,4 @@ def main():
 
 
 if __name__ == '__main__':
-<<<<<<< HEAD
     main()
-=======
-    main()
->>>>>>> parent of 4747fce (Deleted Main)
