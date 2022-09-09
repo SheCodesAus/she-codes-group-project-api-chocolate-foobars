@@ -9,6 +9,13 @@ from .permissions import IsOwnerOrReadOnly
 
 class CustomUserList(APIView):
 
+    def get_permissions(self):
+        if self.request.method == 'POST':
+            permissions = [permissions.AllowAny]
+        else:
+            permissions = [permissions.IsAdminUser]
+        return [permissions() for permission in permissions]
+    
     def get(self, request):
         users = CustomUser.objects.all()
         serializer = CustomUserSerializer(users, many=True)
@@ -19,7 +26,7 @@ class CustomUserList(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-        return Response(serializer.errors)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class CustomUserDetail(APIView):
 
@@ -45,9 +52,14 @@ class CustomUserUpdate (APIView):
     def put(self, request):
         user = request.user
         data = request.data
-        serializer = CustomUserSerializer(
-            instance=user,data=data,partial=True
+        if user.is_staff:
+            serializer = CustomUserSerializer(
+                instance=user,data=data,partial=True
         )
+        else:
+            serializer = RestrictedCustomUserSerializer(
+                instance=user,data=data,partial=True
+            )
         if serializer.is_valid():
             serializer.save()
             return Response(status=status.HTTP_200_OK)
