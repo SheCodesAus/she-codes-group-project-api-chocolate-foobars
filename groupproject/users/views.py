@@ -13,7 +13,8 @@ class CustomObtainAuthToken(ObtainAuthToken):
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)
         token = Token.objects.get(key=response.data['token'])
-        return Response({'token': token.key, 'id': token.user_id})
+        user = CustomUser.objects.get(pk=token.user_id)
+        return Response({'token': token.key, 'id': token.user_id, 'superuser': user.is_superuser})
         
 class CustomUserList(APIView):
 

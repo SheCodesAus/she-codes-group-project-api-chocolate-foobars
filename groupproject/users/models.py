@@ -17,7 +17,7 @@ POSITIONS = (
 
 STATUS = (
   ('Application received', 'Application received'),
-  ('Unsucessful', 'Unsucessful'),
+  ('Unsuccessful', 'Unsuccessful'),
   ('Ready for interview', 'Ready for interview'),
   ('Position offered', 'Position offered'),
   ('Active', 'Active'),
