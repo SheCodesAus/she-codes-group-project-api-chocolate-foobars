@@ -6,6 +6,7 @@ from users.models import SKILLS
 
 class CustomUserSerializer(serializers.Serializer):
     id = serializers.ReadOnlyField()
+    is_superuser = 
     username = serializers.CharField(max_length=200)
     first_name = serializers.CharField(max_length=200)
     last_name = serializers.CharField(max_length=200)
