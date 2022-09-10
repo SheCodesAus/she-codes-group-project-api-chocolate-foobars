@@ -28,6 +28,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY','5*15pt5log&-bjpkqo0117!b!x4do-m
 DEBUG = DEBUG = os.environ.get('DJANGO_DEBUG') != 'False'
 
 ALLOWED_HOSTS = ['*']
+CORS_ALLOW_ALL_ORIGINS = True
 
 
 # Application definition
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'rest_framework',
     'rest_framework.authtoken',
+    'corsheaders',
     'multiselectfield',
 ]
 
@@ -50,6 +52,7 @@ REST_FRAMEWORK = {'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework.authenticat
 AUTH_USER_MODEL = 'users.CustomUser'
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
