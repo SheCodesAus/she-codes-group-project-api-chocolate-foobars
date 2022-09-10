@@ -11,10 +11,10 @@ class CustomUserList(APIView):
 
     def get_permissions(self):
         if self.request.method == 'POST':
-            permissions = [permissions.AllowAny]
+            perms = [permissions.AllowAny]
         else:
-            permissions = [permissions.IsAdminUser]
-        return [permissions() for permission in permissions]
+            perms = [permissions.IsAdminUser]
+        return [permission() for permission in perms]
     
     def get(self, request):
         users = CustomUser.objects.all()

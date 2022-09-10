@@ -7,6 +7,8 @@ from users.models import SKILLS
 class CustomUserSerializer(serializers.Serializer):
     id = serializers.ReadOnlyField()
     username = serializers.CharField(max_length=200)
+    first_name = serializers.CharField(max_length=200)
+    last_name = serializers.CharField(max_length=200)
     email = serializers.CharField(max_length=200)
     password = serializers.CharField(max_length=200)
     phone_number = serializers.CharField(max_length=200)
@@ -25,6 +27,8 @@ class CustomUserSerializer(serializers.Serializer):
 
     def update(self, instance, validated_data):
         instance.username = validated_data.get('username', instance.username)
+        instance.first_name = validated_data.get('first_name', instance.first_name)
+        instance.last_name = validated_data.get('last_name', instance.last_name)
         instance.email = validated_data.get('email',instance.email)
         instance.phone_number = validated_data.get('phone_number', instance.phone_number)
         instance.cv = validated_data.get('cv', instance.cv)
@@ -45,6 +49,8 @@ class CustomUserSerializer(serializers.Serializer):
 class RestrictedCustomUserSerializer(serializers.Serializer):
     id = serializers.ReadOnlyField()
     username = serializers.CharField(max_length=200, read_only=True)
+    first_name = serializers.CharField(max_length=200, read_only=True)
+    last_name = serializers.CharField(max_length=200, read_only=True)
     email = serializers.CharField(max_length=200, read_only=True)
     password = serializers.CharField(max_length=200)
     phone_number = serializers.CharField(max_length=200, read_only=True)
@@ -62,17 +68,6 @@ class RestrictedCustomUserSerializer(serializers.Serializer):
         return CustomUser.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
-        instance.username = validated_data.get('username', instance.username)
-        instance.email = validated_data.get('email',instance.email)
-        instance.phone_number = validated_data.get('phone_number', instance.phone_number)
-        instance.cv = validated_data.get('cv', instance.cv)
-        instance.state = validated_data.get('state', instance.state)
-        instance.feedback_for_mentors = validated_data.get('feedback_for_mentors', instance.feedback_for_mentors)
-        instance.mentor_comments = validated_data.get('mentor_comments', instance.mentor_comments)
-        instance.status = validated_data.get('status', instance.status)
-        instance.skills = validated_data.get('skills', instance.skills)
-        instance.position = validated_data.get('position', instance.position)
-
         if "password" in validated_data.keys():
             instance.password = make_password(validated_data.get('password'))
         instance.save()
