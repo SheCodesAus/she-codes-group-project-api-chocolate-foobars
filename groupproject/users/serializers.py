@@ -6,7 +6,7 @@ from users.models import SKILLS
 
 class CustomUserSerializer(serializers.Serializer):
     id = serializers.ReadOnlyField()
-    is_superuser = 
+    is_superuser = serializers.BooleanField(read_only=True)
     username = serializers.CharField(max_length=200)
     first_name = serializers.CharField(max_length=200)
     last_name = serializers.CharField(max_length=200)
@@ -49,6 +49,7 @@ class CustomUserSerializer(serializers.Serializer):
     
 class RestrictedCustomUserSerializer(serializers.Serializer):
     id = serializers.ReadOnlyField()
+    is_superuser = serializers.BooleanField(read_only=True)
     username = serializers.CharField(max_length=200, read_only=True)
     first_name = serializers.CharField(max_length=200, read_only=True)
     last_name = serializers.CharField(max_length=200, read_only=True)
