@@ -6,21 +6,20 @@ from users.models import SKILLS
 
 class CustomUserSerializer(serializers.Serializer):
     id = serializers.ReadOnlyField()
-    is_superuser = 
     username = serializers.CharField(max_length=200)
-    first_name = serializers.CharField(max_length=200)
-    last_name = serializers.CharField(max_length=200)
-    email = serializers.CharField(max_length=200)
+    first_name = serializers.CharField(max_length=200, allow_blank=True)
+    last_name = serializers.CharField(max_length=200, allow_blank=True)
+    email = serializers.CharField(max_length=200, allow_blank=True)
     password = serializers.CharField(max_length=200)
-    phone_number = serializers.CharField(max_length=200)
-    cv = serializers.CharField(max_length=200)
-    state = serializers.CharField(max_length=200)
-    interview_notes = serializers.CharField(max_length=2000)
-    feedback_for_mentors = serializers.CharField(max_length=2000)
-    mentor_comments = serializers.CharField(max_length=2000)
-    position = serializers.CharField(max_length=200)
-    skills = serializers.MultipleChoiceField(choices=SKILLS)
-    status = serializers.CharField(max_length=200)
+    phone_number = serializers.CharField(max_length=200, allow_blank=True)
+    cv = serializers.CharField(max_length=200, allow_blank=True)
+    state = serializers.CharField(max_length=200, allow_blank=True)
+    interview_notes = serializers.CharField(max_length=2000, allow_blank=True)
+    feedback_for_mentors = serializers.CharField(max_length=2000, allow_blank=True)
+    mentor_comments = serializers.CharField(max_length=2000, allow_blank=True)
+    position = serializers.CharField(max_length=200,allow_blank=True)
+    skills = serializers.MultipleChoiceField(choices=SKILLS, allow_blank=True)
+    status = serializers.CharField(max_length=200, allow_blank=True)
     
     def create(self, validated_data):
         validated_data['password'] = make_password(validated_data.get('password'))
