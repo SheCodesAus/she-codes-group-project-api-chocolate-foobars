@@ -53,23 +53,24 @@ class CustomUserDetail(APIView):
 class CustomUserUpdate (APIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
-    def get(self, request):
+    def get(self, request, pk):
         user = request.user
         serializer = CustomUserSerializer(user)
         return Response(serializer.data)
 
-    def put(self, request):
+    def put(self, request, pk):
         user = request.user
+        editted_user = CustomUser.objects.get(pk=pk)
         data = request.data
         if user.is_superuser:
             serializer = CustomUserSerializer(
-                instance=user,data=data,partial=True
+                instance=editted_user,data=data,partial=True
         )
         else:
             serializer = RestrictedCustomUserSerializer(
-                instance=user,data=data,partial=True
+                instance=editted_user,data=data,partial=True
             )
         if serializer.is_valid():
             serializer.save()
-            return Response(status=status.HTTP_200_OK)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(status=status.HTTP_400_BAD_REQUEST)
